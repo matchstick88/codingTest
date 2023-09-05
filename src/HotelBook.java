@@ -1,35 +1,41 @@
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class HotelBook {
-    static class DateItem {
-        String datetime;
-
-        DateItem(String date) {
-            this.datetime = date;
-        }
-    }
-
-    static class SortByDate implements Comparator<DateItem> {
-
-        @Override
-        public int compare(DateItem a, DateItem b) {
-            return a.datetime.compareTo(b.datetime);
-        }
-    }
-
-    public int solution(String[][] book_times) throws Exception {
-        int answer = 1;
-        Date[] date_times = new Date[book_times.length];
-
-//        System.out.println(book_time);
-        System.out.println(Arrays.deepToString(book_times));
-        List<String[]> bookList = new ArrayList<>();
-        bookList = Arrays.stream(book_times).toList();
+    public int solution(String[][] book_times) {
 
         Arrays.sort(book_times, (a, b) -> a[0].compareTo(b[0]));
+        List<Integer> rooms = new ArrayList<>();
+        for (String[] book_time : book_times) {
+            boolean not_change = true;
+            Integer startTime = Integer.parseInt(book_time[0].split(":")[0]) * 60 + Integer.parseInt(book_time[0].split(":")[1]);
+            Integer endTime = Integer.parseInt(book_time[1].split(":")[0]) * 60 + Integer.parseInt(book_time[1].split(":")[1]) + 10;
+            if (rooms.size() < 1) {
+                rooms.add(endTime);
+            } else {
+                for (int i = 0; i < rooms.size(); i++) {
+                    if (rooms.get(i) <= startTime) {
+                        rooms.set(i, endTime);
+                        not_change = false;
+                        break;
+                    }
+                }
+                if (not_change)
+                    rooms.add(endTime);
+            }
+        }
+//        System.out.println(book_time);
+//        System.out.println(Arrays.deepToString(book_times));
+//        List<String[]> bookList = new ArrayList<>();
+
+
+//        bookList = Arrays.stream(book_times).toList();
+
+
         System.out.println(Arrays.deepToString(book_times));
+
+
         Arrays.sort(book_times, (a, b) -> a[1].compareTo(b[1]));
         System.out.println(Arrays.deepToString(book_times));
 
@@ -49,7 +55,7 @@ public class HotelBook {
 //            System.out.println(Arrays.deepToString(book_time));
 //        }
 
-        return answer;
+        return rooms.size();
     }
 
 

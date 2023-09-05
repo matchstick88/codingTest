@@ -13,16 +13,17 @@ public class Main {
                 {"14:10", "19:20"},
                 {"18:20", "21:20"}};
 
-        hb.solution(book_time);
+        int result = hb.solution(book_time);
+        System.out.println(result);
 
 
 
-        Expire expire = new Expire();
-        String args1 = "2020.01.01";
-        String[] args2 = {"Z 3", "D 5"};
-        String[] args3 = {"2019.01.01 D", "2019.11.15 Z", "2019.08.02 D", "2019.07.01 D", "2018.12.28 Z"};
-        int[] result = expire.solution(args1, args2, args3);
+//        Expire expire = new Expire();
+//        String args1 = "2020.01.01";
+//        String[] args2 = {"Z 3", "D 5"};
+//        String[] args3 = {"2019.01.01 D", "2019.11.15 Z", "2019.08.02 D", "2019.07.01 D", "2018.12.28 Z"};
+//        int[] result = expire.solution(args1, args2, args3);
 
-        System.out.println(Arrays.stream(result).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
+//        System.out.println(Arrays.stream(result).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
     }
 }
